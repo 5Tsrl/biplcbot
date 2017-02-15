@@ -28,6 +28,7 @@ bot.onText(/(\/)?start/, function (msg, match) {
  bot.on('message', function (msg) {
        //console.log(msg)
      if(msg.text.match(/\/start/) ) return
+     if(msg.text.match( /(\/)?id/i ) return
      var snrex = /[0-9]{9}/
      var found = msg.text.match(snrex)
      if(found){
@@ -67,3 +68,8 @@ function doneWriting(){}
 function getUtente(msg){
   return 'id: '+ msg.from.id + ' name: ' + msg.from.first_name +  ' ' + msg.from.last_name
 }
+
+bot.onText(/(\/)?id/i, function (msg, match) {
+    console.log(getUtente(msg))
+    bot.sendMessage(msg.from.id, `Il tuo Telegram ID è *${msg.from.id}*`, msgOpts)
+})
